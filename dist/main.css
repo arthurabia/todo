@@ -1,1 +1,101 @@
 
+:root{
+    --yellow: #E0D73A;
+    font-size: 2rem;
+}
+
+@font-face {
+    font-family: 'open_24_display_stregular';
+    src: url('open_24_display_st-webfont.woff') format('woff2'),
+         url('open_24_display_st-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.body{    
+    padding-top: 5rEM;
+    background: rgb(218,100,43);
+    background: linear-gradient(62deg, rgba(218,100,43,1) 19%, rgba(249,255,127,1) 35%, rgba(115,200,35,1) 100%) fixed;
+    display: grid;
+    grid-template-areas:    '. . .'
+                            '. main main'
+                            '. second second'
+                            '. . .';
+    font-family: sans-serif;
+    color:var(--yellow);
+}
+
+
+.main-space{
+    grid-area: main;
+    display: grid;
+    grid-template-areas:    'kanji1 header . .'
+                            'kanji1 time time todo'
+                            '. time time todo';
+    outline: 3px solid var(--yellow);
+    background-color: black;
+}
+
+.second-space{
+    grid-area: second;
+    display: grid;
+    grid-template-areas: 'menu-down description';
+}
+
+.kanji-one{
+    grid-area: kanji1;   
+}
+
+.kanji-one .type{
+    display: block;
+}
+
+.header-timer{
+    grid-area: header;
+    position: relative;
+    left: 10rem;
+}
+
+
+.timer{
+    grid-area: time;
+    font-size: 9rem;
+    font-family: 'open_24_display_stregular', sans-serif;
+    transform: scale(1, 1.2);
+    
+}
+
+.todo-list{    ;
+    grid-area: todo;
+}
+
+.todo{
+    border: 1px solid var(--yellow);
+    padding : 0.3rem;
+    margin: 0.2rem 1rem 0.5rem 0rem ;
+    min-width: 2rem;
+}
+
+.menu-down{
+    grid-area: menu-down;
+    justify-self: end;
+}
+
+.todo-description{
+    grid-area: description;
+    background: black;
+    padding: 1rem 0rem 3rem 1rem;
+    justify-self: end;
+    align-self: end;
+    position: relative;
+    top: 0.1rem;
+}
+
+.button{
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.main-space{
+
+}
