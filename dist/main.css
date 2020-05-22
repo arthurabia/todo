@@ -2,6 +2,8 @@
 :root{
     --yellow: #E0D73A;
     font-size: 2rem;
+    text-transform: uppercase;
+    background: linear-gradient(62deg, rgba(218, 100, 43, 1) 19%, rgba(249, 255, 127, 1) 35%, rgba(115, 200, 35, 1) 100%) fixed;
 }
 
 @font-face {
@@ -12,61 +14,74 @@
     font-style: normal;
 }
 
-.body{    
-    padding-top: 5rEM;
+.body{
+    margin: 3rem 1rem 0rem 5rem;
     background: rgb(218,100,43);
     background: linear-gradient(62deg, rgba(218,100,43,1) 19%, rgba(249,255,127,1) 35%, rgba(115,200,35,1) 100%) fixed;
     display: grid;
-    grid-template-areas:    '. . .'
-                            '. main main'
-                            '. second second'
-                            '. . .';
+    grid-template-areas:    'kanji1 header .'
+                            '. time todolist'
+                            '. second description';
+    grid-template-rows: 1rem 15rem auto;
     font-family: sans-serif;
     color:var(--yellow);
+    background:black
 }
-
 
 .main-space{
     grid-area: main;
-    display: grid;
-    grid-template-areas:    'kanji1 header . .'
-                            'kanji1 time time todo'
-                            '. time time todo';
-    outline: 3px solid var(--yellow);
+    grid-template-columns: 2rem auto;
+    border: 0.1rem solid var(--yellow);
     background-color: black;
-}
-
-.second-space{
-    grid-area: second;
-    display: grid;
-    grid-template-areas: 'menu-down description';
+    border-right-style: none;
 }
 
 .kanji-one{
-    grid-area: kanji1;   
+    grid-area: kanji1;
+    background: black;
+    position: relative;
+    bottom: 1rem;
+    left: 3rem;
+    z-index: 2;
+    align-self: start;
 }
 
 .kanji-one .type{
     display: block;
 }
 
-.header-timer{
+.header-timer {
     grid-area: header;
+    align-self: center;
+    justify-self: center;
     position: relative;
-    left: 10rem;
+    right: 4rem;
+    font-size: 0.7rem;
+    background-color: black;
 }
 
+.jap{
+    font-family: 'Noto Serif JP',serif;
+}
 
 .timer{
     grid-area: time;
-    font-size: 9rem;
+    font-size: 11rem;
     font-family: 'open_24_display_stregular', sans-serif;
-    transform: scale(1, 1.2);
-    
+    align-self: start;
+    justify-self: start;
+    transform: scale(1, 1.35);
+    transform-origin: bottom;
 }
 
-.todo-list{    ;
-    grid-area: todo;
+.todo-list{    
+    grid-area: todolist;
+    display: grid;
+    justify-items: center;
+    font-size: 0.8rem;
+    align-items: start;
+    background-color: transparent;
+    overflow-y: auto;
 }
 
 .todo{
@@ -76,26 +91,26 @@
     min-width: 2rem;
 }
 
-.menu-down{
-    grid-area: menu-down;
-    justify-self: end;
-}
+
 
 .todo-description{
     grid-area: description;
     background: black;
-    padding: 1rem 0rem 3rem 1rem;
     justify-self: end;
     align-self: end;
     position: relative;
     top: 0.1rem;
 }
 
-.button{
-    display: inline-block;
-    padding-left: 20px;
+.second-space {
+    grid-area: second;
+    display: grid;
+    grid-template-areas: '. button button button button';
+    grid-template-columns: auto auto auto auto 2rem;
+    font-size: 0.7rem;
+    direction: rtl;
 }
 
-.main-space{
-
+.button {
+    display: inline-block;
 }
