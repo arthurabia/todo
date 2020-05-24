@@ -1,6 +1,7 @@
 
 :root{
     --yellow: #E0D73A;
+    --border: #E0D73A;
     font-size: 2rem;
     text-transform: uppercase;
     background: linear-gradient(62deg, rgba(218, 100, 43, 1) 19%, rgba(249, 255, 127, 1) 35%, rgba(115, 200, 35, 1) 100%) fixed;
@@ -14,18 +15,23 @@
     font-style: normal;
 }
 
-.body{
-    margin: 3rem 1rem 0rem 5rem;
+.mother{
+    margin: 2rem 1rem 0rem 3rem;
     background: rgb(218,100,43);
     background: linear-gradient(62deg, rgba(218,100,43,1) 19%, rgba(249,255,127,1) 35%, rgba(115,200,35,1) 100%) fixed;
     display: grid;
-    grid-template-areas:    'kanji1 header .'
+    grid-template-areas:    'kanji1 header surtodo'
                             '. time todolist'
                             '. second description';
     grid-template-rows: 1rem 15rem auto;
     font-family: sans-serif;
     color:var(--yellow);
-    background:black
+}
+
+.body{
+    min-width: 1555px;
+    max-width: 1592px;
+    margin : 0 auto;
 }
 
 .main-space{
@@ -40,14 +46,12 @@
     grid-area: kanji1;
     background: black;
     position: relative;
-    bottom: 1rem;
-    left: 3rem;
-    z-index: 2;
-    align-self: start;
-}
-
-.kanji-one .type{
-    display: block;
+    left: 5rem;
+    top:1.3rem;
+    z-index: 1;
+    box-shadow: -0.1rem -0.1rem var(--yellow),
+    -0.1rem 0.1rem var(--yellow);
+    min-height: 4rem;
 }
 
 .header-timer {
@@ -60,19 +64,61 @@
     background-color: black;
 }
 
-.jap{
+.header-background {
+    grid-area: header;
+    background-color: black;
+}
+
+.surtodo{
+    grid-area: surtodo;
+    background-color: black;
+}
+
+.jap-one{
+    grid-area: kanji1;
+    position: relative;
+    left: 5rem;
+    top:1rem;
     font-family: 'Noto Serif JP',serif;
+    z-index: 4;
+    word-wrap: none;
+    word-break: keep-all;
+}
+
+.bigger{
+    font-size: 2rem;
 }
 
 .timer{
     grid-area: time;
+    position: relative;
+    top:0.5rem;
     font-size: 11rem;
     font-family: 'open_24_display_stregular', sans-serif;
     align-self: start;
     justify-self: start;
     transform: scale(1, 1.35);
-    transform-origin: bottom;
+    transform-origin: center;
+    padding-left: 1rem;
+    z-index: 4;
+
 }
+
+.timer-background{
+    grid-area: time;
+    position:relative;
+    background: black;
+    outline: 0.1rem solid var(--border);
+    z-index: 0;
+}
+
+.timer-black {
+    grid-area: time;
+    background: black;
+    position: relative;
+    z-index: 2;
+}
+
 
 .todo-list{    
     grid-area: todolist;
@@ -82,6 +128,7 @@
     align-items: start;
     background-color: transparent;
     overflow-y: auto;
+    background: black;
 }
 
 .todo{
@@ -89,6 +136,7 @@
     padding : 0.3rem;
     margin: 0.2rem 1rem 0.5rem 0rem ;
     min-width: 2rem;
+    background: black;
 }
 
 
@@ -105,12 +153,21 @@
 .second-space {
     grid-area: second;
     display: grid;
-    grid-template-areas: '. button button button button';
-    grid-template-columns: auto auto auto auto 2rem;
+    grid-template-areas: 'button button button button .';
     font-size: 0.7rem;
     direction: rtl;
 }
 
 .button {
     display: inline-block;
+    background: black;
+    padding-bottom: 0.5rem;
+    padding-top: 0.1rem;
+    border: 0.1rem solid var(--border);
+    justify-self: center;
+    min-width: 4rem;
+    max-height: 1.5rem;
+    min-height: 1.5rem;
+    text-align: center;
+    
 }
