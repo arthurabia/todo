@@ -4,8 +4,21 @@
     --border: #E0D73A;
     font-size: 2rem;
     text-transform: uppercase;
-    background: linear-gradient(62deg, rgba(218, 100, 43, 1) 19%, rgba(249, 255, 127, 1) 35%, rgba(115, 200, 35, 1) 100%) fixed;
+    background: black;
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    margin-left: -1rem;
+    background-image:   linear-gradient(to right, rgba(0, 198, 248, 0.7) 2%, rgba(255, 255, 255, 0) 0%),
+                        linear-gradient(to right, rgba(0, 198, 248, 0.7) 2%, rgba(255, 255, 255, 0) 0%),
+                        linear-gradient(to right, rgba(0, 198, 248, 0.7) 2%, rgba(255, 255, 255, 0) 0%),
+                        linear-gradient(to right, rgba(0, 198, 248, 0.7) 2%, rgba(255, 255, 255, 0) 0%);
+    background-size: 5rem 3rem;
+    background-position: top right,bottom left, top, bottom;
+    background-repeat: repeat-x;
 }
+
+
 
 @font-face {
     font-family: 'open_24_display_stregular';
@@ -15,23 +28,35 @@
     font-style: normal;
 }
 
-.mother{
-    margin: 2rem 1rem 0rem 3rem;
-    background: rgb(218,100,43);
-    background: linear-gradient(62deg, rgba(218,100,43,1) 19%, rgba(249,255,127,1) 35%, rgba(115,200,35,1) 100%) fixed;
-    display: grid;
-    grid-template-areas:    'kanji1 header surtodo'
-                            '. time todolist'
-                            '. second description';
-    grid-template-rows: 1rem 15rem auto;
-    font-family: sans-serif;
-    color:var(--yellow);
+.body{
+    min-width: 2080px;
+    max-width: 2080px;
+    perspective: 60rem;
+    perspective-origin: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding-top: 1.5rem;
+    background: linear-gradient(62deg, rgba(218, 100, 43, 1) 19%, rgba(249, 255, 127, 1) 35%, rgba(115, 200, 35, 1) 100%) fixed;
 }
 
-.body{
-    min-width: 1555px;
-    max-width: 1592px;
-    margin : 0 auto;
+.sousbody{
+    transform: rotateX(-10deg) rotateY(-30deg) rotateZ(-8deg);
+    position: relative;
+    right: 7rem;
+}
+
+.mother {
+    display: grid;
+    grid-template-areas: 'kanji1 header surtodo'
+        '. time todolist'
+        '. second description';
+    grid-template-rows: 1rem 12rem auto;
+    grid-template-columns: 10rem 28.5rem 10rem;
+    font-family: sans-serif;
+    color: var(--yellow);
 }
 
 .main-space{
@@ -46,12 +71,25 @@
     grid-area: kanji1;
     background: black;
     position: relative;
-    left: 5rem;
-    top:1.3rem;
+    left: 6rem;
     z-index: 1;
     box-shadow: -0.1rem -0.1rem var(--yellow),
     -0.1rem 0.1rem var(--yellow);
-    min-height: 4rem;
+    min-height: 3rem;
+}
+
+.kanji-two {
+    grid-area: kanji1;
+    background: black;
+    position: relative;
+    left: 15.45rem;
+    bottom: 2.24rem;
+    z-index: 1;
+    box-shadow: 0rem 0.13rem  var(--border);
+    height: 3rem;
+    width:2rem;
+    transform: rotate(230deg);
+    transform-origin: bottom;
 }
 
 .header-timer {
@@ -59,40 +97,39 @@
     align-self: center;
     justify-self: center;
     position: relative;
-    right: 4rem;
+    right: 3.5rem;
+    top:1rem;
     font-size: 0.7rem;
-    background-color: black;
+    z-index: 4;
 }
 
-.header-background {
-    grid-area: header;
-    background-color: black;
-}
+
 
 .surtodo{
     grid-area: surtodo;
-    background-color: black;
 }
 
 .jap-one{
     grid-area: kanji1;
     position: relative;
-    left: 5rem;
-    top:1rem;
+    left: 6rem;
+    top:0.3rem;
     font-family: 'Noto Serif JP',serif;
     z-index: 4;
     word-wrap: none;
     word-break: keep-all;
+    line-height: 1rem;
+    background: black;
 }
 
 .bigger{
-    font-size: 2rem;
+    font-size: 2.3rem;
+    letter-spacing: -0.5rem;
 }
 
 .timer{
     grid-area: time;
     position: relative;
-    top:0.5rem;
     font-size: 11rem;
     font-family: 'open_24_display_stregular', sans-serif;
     align-self: start;
@@ -101,15 +138,87 @@
     transform-origin: center;
     padding-left: 1rem;
     z-index: 4;
-
+    bottom: 1.5rem;
 }
 
 .timer-background{
     grid-area: time;
     position:relative;
     background: black;
-    outline: 0.1rem solid var(--border);
+    box-shadow: -0.1rem 0.1rem var(--border), 0rem -0.1rem var(--border);
     z-index: 0;
+}
+
+.timer-background-two {
+    grid-area: time;
+    position: relative;
+    top:15.6rem;
+    background: black;
+    z-index: -1;
+    width: 38.5rem;
+    height: 2.1rem;
+    transform: rotate(358deg);
+}
+
+.timer-background-three{
+    grid-area: time;
+    position: relative;
+    top:2rem;
+    right:4rem;
+    background: black;
+    border-right: 0.1rem solid var(--border);
+    border-top: 0.1rem solid var(--border);
+    z-index: 3;
+    width: 4rem;
+    height: 9.87rem;
+}
+
+.timer-background-four {
+    grid-area: time;
+    position: relative;
+    top: 4.8rem;
+    right: 7.3rem;
+    background: black;
+    z-index: 3;
+    width: 3rem;
+    height: 9rem;
+    transform: rotate(26deg) scale(1, 1.6);
+}
+
+.timer-background-five {
+    grid-area: time;
+    position: relative;
+    top: 7rem;
+    right: 8.5rem;
+    background: black;
+    z-index: 3;
+    width: 4.3rem;
+    height: 9.87rem;
+    transform: rotate(26deg) scale(1, 1.2);
+}
+
+.timer-background-six {
+    grid-area: time;
+    position: relative;
+    top: 17.5rem;
+    right: 15.5rem;
+    background: black;
+    z-index: 3;
+    width: 4rem;
+    height: 18rem;
+    transform: rotate(26deg);
+}
+
+.timer-background-last {
+    grid-area: time;
+    position: relative;
+    top: 17.8rem;
+    right: 4.2rem;
+    background: black;
+    z-index: 5;
+    width: 12rem;
+    height: 16rem;
+    transform: rotate(26deg);
 }
 
 .timer-black {
@@ -129,25 +238,41 @@
     background-color: transparent;
     overflow-y: auto;
     background: black;
-}
+    box-shadow: 0.1rem 0.1rem var(--border),
+                0rem -0.1rem var(--border), 
+                -0.1rem 0.1rem var(--border),
+                0.1rem -0.1rem var(--border);
+                }
 
 .todo{
-    border: 1px solid var(--yellow);
+    border: 0.1rem solid var(--yellow);
     padding : 0.3rem;
     margin: 0.2rem 1rem 0.5rem 0rem ;
     min-width: 2rem;
     background: black;
+    width: 9rem;
 }
 
-
+.sort{
+    position: relative;
+    top:1rem;
+}
 
 .todo-description{
     grid-area: description;
     background: black;
     justify-self: end;
-    align-self: end;
+    align-self: start;
     position: relative;
     top: 0.1rem;
+    height: 85%;
+}
+
+.todo-description-text{
+    margin: 0.3rem;
+    padding : 0.5rem;
+    outline: 0.1rem solid var(--border);
+    height: 2.5rem;
 }
 
 .second-space {
@@ -156,6 +281,8 @@
     grid-template-areas: 'button button button button .';
     font-size: 0.7rem;
     direction: rtl;
+    border-bottom: 0.5rem solid black;
+    padding-bottom: 1rem;
 }
 
 .button {
@@ -169,5 +296,11 @@
     max-height: 1.5rem;
     min-height: 1.5rem;
     text-align: center;
-    
+}
+
+.light {
+    background: rgb(255, 0, 0);
+    width: 100%;
+    height: 1rem;
+    box-shadow: 0 0 0.5rem 0.05rem rgba(255, 0, 0, 0.7);
 }
