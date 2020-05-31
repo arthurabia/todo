@@ -1,5 +1,4 @@
 import {todoFactory} from "./todoFactory.js"
-import {projectFactory} from "./projectFactory.js"
 
 
 var button = document.getElementById("button1")

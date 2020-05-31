@@ -231,9 +231,60 @@
     color: rgb(15, 14, 4);
 }
 
+.hidden{
+    display: none;
+}
+
+.entry{
+    font-family: 'Noto Serif JP', sans-serif;
+    font-size: 1rem;
+    background: black;
+    z-index: 10;
+    position: relative;
+    top: 3rem;
+    left: 2rem;
+    padding: 2rem;
+    color: yellow;
+    width: 80%;
+}
+.small-entry{
+    font-size: 1.1rem;
+    display: block;
+    width: 40%;
+    height: 50%;
+    background: black;
+    border: 0.1rem solid var(--border);
+    color: yellow;
+    padding: 0.3rem;
+}
+
+.small-button{
+    display: block;
+    position: fixed;
+    font-size: 0.8rem;
+    left: 80%;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    background: rgb(255, 0, 0);
+    border: none;
+    box-shadow: 0 0 0.5rem 0.05rem rgba(255, 0, 0, 0.7);
+}
+
+.large-entry{
+    width: 100%;
+    font-size: 1.1rem;
+    display: block;
+    height: 6rem;
+    overflow: hidden;
+    background: black;
+    border: 0.1rem solid var(--border);
+    color: yellow;
+    padding: 0.3rem;
+    height: 50%;
+}
+
 .real {
     position: relative;
-    left: 1.5rem;
 }
 
 .todo-list{    

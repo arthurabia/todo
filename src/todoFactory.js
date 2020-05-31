@@ -1,7 +1,6 @@
-const todoFactory = (title,dueDate,priority = 1) => {
-    let isInProject;
+const todoFactory = (dateAdded,title,description) => {
     let isDone = false;
-    return {title,dueDate,priority,isInProject,isDone}
+    return {dateAdded,title,description,isDone}
 }
 
 export {todoFactory}
