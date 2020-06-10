@@ -1,4 +1,15 @@
 import {todoFactory} from "./todoFactory.js"
+let taskList = [];
+
+let loadie = () => {
+   if (localStorage.getItem('taskList') === null) {
+      console.log('I dunoo it')
+      localStorage.setItem('taskList', JSON.stringify(taskList))
+   } else {
+      console.log('I remember it')
+      taskList = JSON.parse(localStorage.getItem('taskList'));
+   }
+}
 
 //Do time and day
 const displayCurrentTime = () =>{
@@ -29,10 +40,13 @@ openFormButton.addEventListener('click', function (e) {
 });
 openFormButton.addEventListener('click', toggleForm);
 
-// Save tasks
-let taskList = [];
+// Load and Save tasks
 
-const displayTasks = () => {
+const saveTask = (taskList) => {
+      localStorage.setItem('taskList', JSON.stringify(taskList))
+}
+
+const displayTasks = (taskList, bool) => {
    let taskTextDescription = document.getElementsByClassName('tododescription')[0];
    taskTextDescription.textContent = '';
    let taskListInHtml = document.getElementsByClassName('todo');
@@ -44,9 +58,9 @@ const displayTasks = () => {
       }
    }
 
-   let pendingTaskList = taskList.filter(x => x.isDone === false)
-   console.log(pendingTaskList)
-   for (let task of pendingTaskList) {
+   for (let task of taskList) {
+      if (task.isDone === bool) {
+         console.log("onea dded")
       let taskInHtml = document.createElement('div');
       let taskTitle = document.createElement('div');
       let taskDescription = document.createElement('div');
@@ -58,20 +72,22 @@ const displayTasks = () => {
       taskInHtml.appendChild(taskTitle);
       taskInHtml.appendChild(taskDescription);
       taskInHtml.addEventListener('click',function(){
-         taskTextDescription.setAttribute("order", pendingTaskList.indexOf(task))
+         taskTextDescription.setAttribute("order", taskList.indexOf(task))
          taskTextDescription.textContent = task.description;
       })
       taskParent.appendChild(taskInHtml);
+      }
    }
 }
+
 let deleteButton = document.getElementsByClassName("checkbox")[0]
 deleteButton.addEventListener("click", function (e) {
-   let pendingTaskList = taskList.filter(x => x.isDone === false)
    let index = document.getElementsByClassName('tododescription')[0]
    index = index.getAttribute("order")
-   pendingTaskList[index].isDone = true;
-   displayTasks();
+   taskList[index].isDone = !taskList[index].isDone;
+   (completedButton.classList.contains('off') === true) ? displayTasks(taskList, false): displayTasks(taskList, true);
    e.stopPropagation();
+   saveTask(taskList);
 })
 
 const addTaskButton = document.getElementsByClassName("small-button")[0];
@@ -80,15 +96,40 @@ addTaskButton.addEventListener("click", function () {
    let descriptionTask = document.getElementsByClassName("large-entry")[0].value;
    const newTask = todoFactory(titleTask, descriptionTask);
    taskList.push(newTask);
-   //console.log(taskList)
    toggleForm();
-   displayTasks();
+   displayTasks(taskList,false);
+   saveTask(taskList);
 })
 
+loadie();
+displayTasks(taskList,false);
 
 
+const completedButton = document.getElementsByClassName("light")[2];
+const pendingButton = document.getElementsByClassName("light")[1];
+completedButton.addEventListener("click", function () {
+   if (completedButton.classList.contains('off')){
+      completedButton.classList.toggle('off')
+      pendingButton.classList.toggle('off')
+      displayTasks(taskList, true);
+   }
+})
 
-//Replace bien le bouton Rouge
-//Ajoute la possibilité de changer le isdone to true
-//Changer le see completed et le see pending
-//Préparer le mode danger
+pendingButton.addEventListener("click", function () {
+   if (pendingButton.classList.contains('off')){
+      completedButton.classList.toggle('off')
+      pendingButton.classList.toggle('off')
+      displayTasks(taskList, false);
+   }
+})
+
+const dangerButton = document.getElementsByClassName("light")[0];
+dangerButton.addEventListener("click", function () {
+   var audio = document.getElementById("audio");
+   if (audio.paused || audio.currentTime === 0){
+      audio.load();
+      audio.play();
+   }
+   else
+      audio.pause();
+})
