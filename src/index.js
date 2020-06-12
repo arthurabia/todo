@@ -1,5 +1,6 @@
 import {todoFactory} from "./todoFactory.js"
 let taskList = [];
+let isDangerModeOn = false;
 
 let loadie = () => {
    if (localStorage.getItem('taskList') === null) {
@@ -13,13 +14,16 @@ let loadie = () => {
 
 //Do time and day
 const displayCurrentTime = () =>{
+   document.getElementsByClassName('real')[0].textContent = ''
    let currentTime = new Date();
    let currentTimeFormatted = ((currentTime.getHours() >= 10) ? currentTime.getHours() : '0' + currentTime.getHours()) + ':' + 
                               ((currentTime.getMinutes() >= 10) ? currentTime.getMinutes() : '0' + currentTime.getMinutes()) + ':' + 
                               ((currentTime.getSeconds() >= 10) ? currentTime.getSeconds() : '0' + currentTime.getSeconds()) 
    document.getElementsByClassName('real')[0].textContent = currentTimeFormatted;
 }
-setInterval(displayCurrentTime, 1000);
+
+
+
 
 const displayCurrentDay = (() => {
    let currentTime = new Date();
@@ -60,7 +64,6 @@ const displayTasks = (taskList, bool) => {
 
    for (let task of taskList) {
       if (task.isDone === bool) {
-         console.log("onea dded")
       let taskInHtml = document.createElement('div');
       let taskTitle = document.createElement('div');
       let taskDescription = document.createElement('div');
@@ -101,9 +104,6 @@ addTaskButton.addEventListener("click", function () {
    saveTask(taskList);
 })
 
-loadie();
-displayTasks(taskList,false);
-
 
 const completedButton = document.getElementsByClassName("light")[2];
 const pendingButton = document.getElementsByClassName("light")[1];
@@ -123,13 +123,74 @@ pendingButton.addEventListener("click", function () {
    }
 })
 
-const dangerButton = document.getElementsByClassName("light")[0];
-dangerButton.addEventListener("click", function () {
+let playMusic = () => {
    var audio = document.getElementById("audio");
-   if (audio.paused || audio.currentTime === 0){
+   if (audio.paused || audio.currentTime === 0) {
+
       audio.load();
       audio.play();
    }
    else
       audio.pause();
+}
+let dangerTime = () => {
+   let futureTime = new Date();
+   futureTime.setMinutes(futureTime.getMinutes() + 5);
+   return setInterval(function () {
+      if (isDangerModeOn) {
+         let currentTime = new Date();
+         let distance = futureTime.getTime() - currentTime.getTime();
+         let minutes = Math.floor(distance / (1000 * 60));
+         let secondsRemaining = distance % (1000 * 60)
+         let seconds = Math.floor(secondsRemaining / (1000));
+         let milliseconds = secondsRemaining % 1000;
+         let currentTimeFormatted = minutes + ':' + seconds + ':' + milliseconds;
+         document.getElementsByClassName('real')[0].textContent = currentTimeFormatted;
+      } else {
+         clearInterval(3)
+      }
+   }, 30)
+}
+
+
+const dangerButton = document.getElementsByClassName("light")[0];
+dangerButton.addEventListener("click", function (e) {
+   let index = document.getElementsByClassName('tododescription')[0];
+   index.textContent = ""
+   let root = document.documentElement;
+   playMusic()
+   document.getElementsByClassName('real')[0].textContent = ''
+   if (isDangerModeOn) {
+      for (let i = 0; i < 10000; i++ ) //10000 to be safe
+         clearInterval(i);
+      setInterval(displayCurrentTime, 1000)
+      let randomColor = '#E0D73A';
+      root.style.setProperty('--yellow', randomColor);   
+   } else {
+      dangerTime();
+      let crazyText = "DO NOT DIE WHATEVER YOU DO DO NOT DIE SHINJI DO YOU HEAR ME YOU HAVE TO STAY ALIVE DO NOT TRY TO UNDERSTAND DO NOT TRY TO FIGHT JUST DO IT STAY STAY ALIVE"
+      for (let i = 0; i < crazyText.length; i++ ){
+         (function(ind){
+            setTimeout(function () { index.textContent += (crazyText[i]) }, 150 * (ind + 1))
+         })(i);
+      }
+      let red = 'red';
+      root.style.setProperty('--yellow', red);  
+      
+
+   }
+   isDangerModeOn = !isDangerModeOn;
+   e.stopPropagation();
 })
+
+
+loadie();
+displayTasks(taskList, false);
+setInterval(displayCurrentTime, 1000);
+
+
+
+//Rajouter le changement de décor
+//Rajouter le temps qui défile
+//Rajouter la caméra qui bouge
+//Rajouter le texte qui défile en bas à droite
